@@ -2,6 +2,9 @@
 FROM openjdk:21-jdk AS build
 WORKDIR /app
 
+# Install xargs
+RUN apt-get update && apt-get install -y findutils
+
 # Copy Gradle wrapper and build files
 COPY build.gradle.kts settings.gradle.kts gradlew ./
 COPY gradle gradle
