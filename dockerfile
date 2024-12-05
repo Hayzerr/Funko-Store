@@ -1,14 +1,25 @@
-# Use the official OpenJDK 21 image as the base image
-FROM openjdk:21-jdk-slim
-
-# Set the working directory in the container
+# Stage 1: Build the application
+FROM openjdk:21-jdk AS build
 WORKDIR /app
 
-# Copy the build files (e.g., JAR file) from the local machine to the container
-COPY build/libs/OnlineStoreBackend-0.0.1-SNAPSHOT.jar app.jar
+# Copy Gradle wrapper and build files
+COPY build.gradle.kts settings.gradle.kts gradlew ./
+COPY gradle gradle
 
-# Expose the port the application will run on
+# Set execution permission for the Gradle wrapper
+RUN chmod +x ./gradlew
+
+# Copy the source code
+COPY src src
+
+# Build the application without running tests
+RUN ./gradlew clean build -x test
+
+# Stage 2: Create the final Docker image using OpenJDK 21
+FROM openjdk:21-jdk
+VOLUME /tmp
+
+# Copy the JAR from the build stage
+COPY --from=build /app/build/libs/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 EXPOSE 8080
-
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
