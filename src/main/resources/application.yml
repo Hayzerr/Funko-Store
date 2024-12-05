@@ -1,12 +1,12 @@
 spring:
   application:
-    name: MovieReservationSystem
+    name: OnlineStore
 
   datasource:
     driverClassName: org.postgresql.Driver
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/OnlineStore}
-    username: ${DATABASE_USERNAME:postgres}
-    password: ${DATABASE_PASSWORD:12345678}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/OnlineStore}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:12345678}
   jpa:
     properties:
       hibernate:
