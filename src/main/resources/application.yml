@@ -4,9 +4,9 @@ spring:
 
   datasource:
     driverClassName: org.postgresql.Driver
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://dpg-ct8shd5ds78s73cgeneg-a.oregon-postgres.render.com/onlinestore_aequ}
-    username: ${SPRING_DATASOURCE_USERNAME:bolashak}
-    password: ${SPRING_DATASOURCE_PASSWORD:NhwdRIVzZganJgIgbBxFuSTk3EpiFztW}
+    url: ${DATABASE_URL:jdbc:postgresql://dpg-ct8shd5ds78s73cgeneg-a.oregon-postgres.render.com/onlinestore_aequ}
+    username: ${DATABASE_USERNAME:bolashak}
+    password: ${DATABASE_PASSWORD:NhwdRIVzZganJgIgbBxFuSTk3EpiFztW}
   jpa:
     properties:
       hibernate:

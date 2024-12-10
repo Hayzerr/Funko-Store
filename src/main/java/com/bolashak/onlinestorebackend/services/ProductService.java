@@ -1,16 +1,18 @@
 package com.bolashak.onlinestorebackend.services;
 
-import com.bolashak.onlinestorebackend.entities.Product;
+import com.bolashak.onlinestorebackend.dto.ProductDto;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface ProductService {
-    Iterable<Product> list();
-    Iterable <Product> getByCategory(String category);
-    Iterable <Product> getByFeature(String feature);
-    Iterable <Product> getByStatus(String status);
-    Iterable <Product> getAll();
-    Product getById(String id);
-    Iterable <Product> getByName(String Name);
-    Iterable <Product> getAll(String status);
-    Iterable <Product> getByStock(String stock);
-    Iterable <Product> getByType(String type);
+    ResponseEntity<List<ProductDto>> list();
+    Iterable <ProductDto> getByCategory(String category);
+    Iterable <ProductDto > getByFeature(String feature);
+    Iterable <ProductDto > getByStatus(String status);
+    Iterable <ProductDto > getAll();
+    ProductDto  getById(String id);
+    Iterable <ProductDto > getByName(String Name);
+    Iterable <ProductDto > getByStock(String stock);
+    Iterable <ProductDto > getByType(String type);
 }
