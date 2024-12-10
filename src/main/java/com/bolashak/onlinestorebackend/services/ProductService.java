@@ -2,16 +2,15 @@ package com.bolashak.onlinestorebackend.services;
 
 import com.bolashak.onlinestorebackend.entities.Product;
 
-import java.util.List;
-
 public interface ProductService {
-    List<Product> getByCategory(String category);
-    List<Product> getByFeature(String feature);
-    List<Product> getByStatus(String status);
-    List<Product> getAll();
+    Iterable<Product> list();
+    Iterable <Product> getByCategory(String category);
+    Iterable <Product> getByFeature(String feature);
+    Iterable <Product> getByStatus(String status);
+    Iterable <Product> getAll();
     Product getById(String id);
-    List<Product> getByName(String Name);
-    List<Product> getAll(String status);
-    List<Product> getByStock(String stock);
-    List<Product> getByType(String type);
+    Iterable <Product> getByName(String Name);
+    Iterable <Product> getAll(String status);
+    Iterable <Product> getByStock(String stock);
+    Iterable <Product> getByType(String type);
 }
