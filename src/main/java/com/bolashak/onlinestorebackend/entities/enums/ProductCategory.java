@@ -1,0 +1,22 @@
+package com.bolashak.onlinestorebackend.entities.enums;
+public enum ProductCategory {
+    COMICS_AND_SUPERHEROES,
+    ANIMATION_AND_CARTOONS,
+    POPS_WITH_PURPOSE,
+    CRIME_AND_DRAMA,
+    ANIME_AND_MANGA,
+    BLACK_FRIDAY_UP_TO_30_PERCENT_OFF,
+    FUNKO_GEAR,
+    SALE_HANDBAGS_AND_WALLETS,
+    HARRY_POTTER,
+    VIDEO_GAMES,
+    MOVIES_AND_TV,
+    MUSIC,
+    AD_ICONS,
+    STAR_TREK,
+    SCIFI,
+    RETRO_TOYS,
+    POP_PEOPLE_COMPONENTS,
+    SPORTS
+}
+

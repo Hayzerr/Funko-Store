@@ -1,7 +1,7 @@
 //package com.bolashak.onlinestorebackend;
 //
 //import com.bolashak.onlinestorebackend.entities.Product;
-//import com.bolashak.onlinestorebackend.services.ProductService;
+//import com.bolashak.onlinestorebackend.services.impl.ProductServiceImpl;
 //import com.fasterxml.jackson.core.JsonParser;
 //import com.fasterxml.jackson.core.type.TypeReference;
 //import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +22,7 @@
 //        SpringApplication.run(JsondbApplication.class, args);
 //    }
 //    @Bean
-//    CommandLineRunner runner(ProductService productService) {
+//    CommandLineRunner runner(ProductServiceImpl productService) {
 //        return args -> {
 //            // Read JSON and write to DB
 //            ObjectMapper mapper = new ObjectMapper();
@@ -30,7 +30,7 @@
 //            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/products.json");
 //            try {
 //                List<Product> products = mapper.readValue(inputStream, typeReference);
-//                productService. save(products);
+//                productService.save(products);
 //                System.out.println("Products Saved!");
 //            } catch (IOException e) {
 //                System.out.println("Unable to save products: " + e.getMessage());

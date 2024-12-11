@@ -1,6 +1,10 @@
 package com.bolashak.onlinestorebackend.controllers;
 
 import com.bolashak.onlinestorebackend.dto.ProductDto;
+import com.bolashak.onlinestorebackend.entities.enums.ProductCategory;
+import com.bolashak.onlinestorebackend.entities.enums.ProductFeature;
+import com.bolashak.onlinestorebackend.entities.enums.ProductStatus;
+import com.bolashak.onlinestorebackend.entities.enums.ProductType;
 import com.bolashak.onlinestorebackend.services.impl.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,16 +26,16 @@ public class ProductController {
         return productService.list();
     }
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<ProductDto>> getByCategory(@PathVariable String category) {
+    public ResponseEntity<List<ProductDto>> getByCategory(@PathVariable ProductCategory category) {
         return ResponseEntity.ok(productService.getByCategory(category));
     }
     @GetMapping("/feature/{feature}")
-    public ResponseEntity<List<ProductDto>> getByFeature(@PathVariable String feature) {
+    public ResponseEntity<List<ProductDto>> getByFeature(@PathVariable ProductFeature feature) {
         return ResponseEntity.ok(productService.getByFeature(feature));
     }
 
     @GetMapping("/status/{status}")
-    public ResponseEntity<List<ProductDto>> getByStatus(@PathVariable String status) {
+    public ResponseEntity<List<ProductDto>> getByStatus(@PathVariable ProductStatus status) {
         return ResponseEntity.ok(productService.getByStatus(status));
     }
 
@@ -46,12 +50,12 @@ public class ProductController {
     }
 
     @GetMapping("/stock/{stock}")
-    public ResponseEntity<List<ProductDto>> getByStock(@PathVariable String stock) {
+    public ResponseEntity<List<ProductDto>> getByStock(@PathVariable Integer stock) {
         return ResponseEntity.ok(productService.getByStock(stock));
     }
 
     @GetMapping("/type/{type}")
-    public ResponseEntity<List<ProductDto>> getByType(@PathVariable String type) {
+    public ResponseEntity<List<ProductDto>> getByType(@PathVariable ProductType type) {
         return ResponseEntity.ok(productService.getByType(type));
     }
 

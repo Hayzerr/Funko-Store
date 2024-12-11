@@ -3,6 +3,10 @@ package com.bolashak.onlinestorebackend.services.impl;
 import com.bolashak.onlinestorebackend.dto.ProductDto;
 import com.bolashak.onlinestorebackend.entities.Image;
 import com.bolashak.onlinestorebackend.entities.Product;
+import com.bolashak.onlinestorebackend.entities.enums.ProductCategory;
+import com.bolashak.onlinestorebackend.entities.enums.ProductFeature;
+import com.bolashak.onlinestorebackend.entities.enums.ProductStatus;
+import com.bolashak.onlinestorebackend.entities.enums.ProductType;
 import com.bolashak.onlinestorebackend.repository.ProductRepository;
 import com.bolashak.onlinestorebackend.services.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -30,20 +34,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getByCategory(String category) {
+    public List<ProductDto> getByCategory(ProductCategory category) {
         List<Product> products = productRepository.findByCategory(category).stream().toList();
 
         return mapToProductDto(products);
     }
 
     @Override
-    public List<ProductDto > getByFeature(String feature) {
+    public List<ProductDto > getByFeature(ProductFeature feature) {
         List<Product> products = productRepository.findByFeature(feature).stream().toList();
 
         return mapToProductDto(products);
     }
     @Override
-    public List<ProductDto > getByStatus(String status) {
+    public List<ProductDto > getByStatus(ProductStatus status) {
         List<Product> products = productRepository.findByStatus(status).stream().toList();
 
         return mapToProductDto(products);
@@ -71,13 +75,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto > getByStock(String stock) {
+    public List<ProductDto > getByStock(Integer stock) {
         List<Product> products = productRepository.findByStock(stock).stream().toList();
 
         return mapToProductDto(products);       }
 
     @Override
-    public List<ProductDto> getByType(String type) {
+    public List<ProductDto> getByType(ProductType type) {
         List<Product> products = productRepository.findByProductType(type).stream().toList();
 
         return mapToProductDto(products);

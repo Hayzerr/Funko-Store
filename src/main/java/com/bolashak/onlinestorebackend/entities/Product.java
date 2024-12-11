@@ -1,6 +1,6 @@
 package com.bolashak.onlinestorebackend.entities;
 
-import com.bolashak.onlinestorebackend.entities.enums.ProductStatus;
+import com.bolashak.onlinestorebackend.entities.enums.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -27,7 +27,7 @@ public class Product extends AbstractEntity<String> {
     @Column(length = 500)
     @Size(max = 500, message = "Feature length must be less than or equal to 500 characters")
     @JsonProperty("Feature")
-    private String feature;
+    private ProductFeature feature;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -52,7 +52,7 @@ public class Product extends AbstractEntity<String> {
 
     @Column(length = 255)
     @JsonProperty("Category")
-    private String category;
+    private ProductCategory category;
 
     @NotNull(message = "Stock is required")
     @Min(value = 0, message = "Stock must be 0 or greater")
@@ -65,7 +65,7 @@ public class Product extends AbstractEntity<String> {
 
     @Column(length = 255)
     @JsonProperty("ProductType")
-    private String productType;
+    private ProductType productType;
 
     @Column(length = 2000)
     @Size(max = 2000, message = "Description length must be less than or equal to 2000 characters")

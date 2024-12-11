@@ -1,7 +1,11 @@
 package com.bolashak.onlinestorebackend.entities.enums;
 
 public enum ProductStatus {
-    AVAILABLE,
-    OUT_OF_STOCK,
-    DISCONTINUED
+    EXCLUSIVE,
+    NEW,
+    NO_STATUS,
+    SALE,
+    BACK_IN_STOCK,
+    COMING_SOON
+
 }

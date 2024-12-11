@@ -7,13 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.IOException;
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "image")
-public class Image extends AbstractEntity<Long> {
+public class Image  extends AbstractEntity<Long> {
 
     @Column(name = "image_url", nullable = false, length = 1000)
     @NotNull(message = "Image URL is required")
