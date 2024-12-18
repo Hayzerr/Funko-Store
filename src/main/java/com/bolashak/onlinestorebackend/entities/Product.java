@@ -17,7 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "product")
 public class Product extends AbstractEntity<String> {
-
     @Column(length = 1000, nullable = false)
     @NotNull(message = "Name is required")
     @Size(max = 1000, message = "Name length must be less than or equal to 1000 characters")

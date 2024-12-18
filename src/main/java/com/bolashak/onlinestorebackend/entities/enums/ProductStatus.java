@@ -7,5 +7,4 @@ public enum ProductStatus {
     SALE,
     BACK_IN_STOCK,
     COMING_SOON
-
 }
