@@ -26,25 +26,11 @@ public class Product {
     @Column(length = 255, unique = true, nullable = false)
     private String id;
 
-
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
-
     @PrePersist
     protected void onCreate() {
         if (this.id == null) {
             this.id = UUID.randomUUID().toString();
         }
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
     }
     @Column(length = 1000, nullable = false)
     @JsonProperty("Name")

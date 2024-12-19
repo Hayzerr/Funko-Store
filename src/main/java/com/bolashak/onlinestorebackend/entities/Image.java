@@ -29,22 +29,6 @@ public class Image{
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
     public Image(String imageUrl, Product product) {
         this.imageUrl = imageUrl;
         this.product = product;
