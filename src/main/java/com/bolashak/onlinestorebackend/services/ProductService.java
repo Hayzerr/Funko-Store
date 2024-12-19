@@ -10,13 +10,17 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ProductService {
-    ResponseEntity<List<ProductDto>> list();
-    Iterable <ProductDto> getByCategory(ProductCategory category);
-    Iterable <ProductDto > getByFeature(ProductFeature feature);
-    Iterable <ProductDto > getByStatus(ProductStatus status);
-    Iterable <ProductDto > getAll();
-    ProductDto  getById(String id);
-    Iterable <ProductDto > getByName(String Name);
-    Iterable <ProductDto > getByStock(Integer stock);
-    Iterable <ProductDto > getByType(ProductType type);
+    List<ProductDto> getAll();
+    ProductDto getById(String id);
+    ProductDto createProduct(ProductDto productDto);
+    ProductDto updateProduct(String id, ProductDto productDto);
+    void deleteProduct(String id);
+
+    List<ProductDto> getByCategory(ProductCategory category);
+    List<ProductDto> getByFeature(ProductFeature feature);
+    List<ProductDto> getByStatus(ProductStatus status);
+    List<ProductDto> getByName(String name);
+    List<ProductDto> getByType(ProductType type);
+    List<ProductDto> getFilteredProducts(ProductCategory category, ProductFeature feature, ProductStatus status,
+                                        ProductType type, String name, int page, int size);
 }

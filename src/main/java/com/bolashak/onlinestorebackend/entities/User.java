@@ -1,5 +1,6 @@
 package com.bolashak.onlinestorebackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,11 +16,24 @@ public class User extends AbstractEntity<Long>{
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Column(nullable = false)
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
+
     @Column(nullable = false, unique = true)
     private String email;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
+
+    @Column
+    private String phone;
+
+    @Column
+    private String address;
 
     @Column(nullable = false)
     private boolean isDeleted;

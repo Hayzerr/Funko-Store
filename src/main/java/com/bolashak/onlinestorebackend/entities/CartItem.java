@@ -2,7 +2,6 @@ package com.bolashak.onlinestorebackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,23 +12,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "image")
-public class Image{
+@Table(name = "cart_items")
+public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String imageUrl;
-
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "cart_id", nullable = false)
+    private Cart cart;
+
+    @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    public Image(String imageUrl, Product product) {
-        this.imageUrl = imageUrl;
-        this.product = product;
-    }
+    @Column(nullable = false)
+    private int quantity;
 }

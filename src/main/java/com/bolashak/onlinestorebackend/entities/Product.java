@@ -1,6 +1,7 @@
 package com.bolashak.onlinestorebackend.entities;
 
 import com.bolashak.onlinestorebackend.entities.enums.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -9,6 +10,7 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,15 +18,25 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "product")
-public class Product extends AbstractEntity<String> {
+public class Product {
+
+    @Id
+    @Column(length = 255, unique = true, nullable = false)
+    private String id;
+
+    @PrePersist
+    public void generateId() {
+        if (this.id == null) {
+            this.id = UUID.randomUUID().toString();
+        }
+    }
+
     @Column(length = 1000, nullable = false)
-    @NotNull(message = "Name is required")
-    @Size(max = 1000, message = "Name length must be less than or equal to 1000 characters")
     @JsonProperty("Name")
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 500)
-    @Size(max = 500, message = "Feature length must be less than or equal to 500 characters")
     @JsonProperty("Feature")
     private ProductFeature feature;
 
@@ -34,27 +46,24 @@ public class Product extends AbstractEntity<String> {
     @JsonProperty("Status")
     private ProductStatus status;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    @NotNull(message = "Default price is required")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Default price must be greater than 0")
+    @Column(nullable = false)
     @JsonProperty("DefaultPrice")
-    private BigDecimal defaultPrice;
+    private Double defaultPrice;
 
-    @Column(precision = 10, scale = 2)
-    @DecimalMin(value = "0.0", inclusive = true, message = "Discount price must be greater than or equal to 0")
+    @Column(nullable = false)
     @JsonProperty("DiscountPrice")
-    private BigDecimal discountPrice;
+    private Double discountPrice;
 
     @Column(length = 1000)
     @JsonProperty("Link")
     private String link;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 255)
     @JsonProperty("Category")
     private ProductCategory category;
 
     @NotNull(message = "Stock is required")
-    @Min(value = 0, message = "Stock must be 0 or greater")
     @JsonProperty("Stock")
     private Integer stock;
 
@@ -62,12 +71,12 @@ public class Product extends AbstractEntity<String> {
     @JsonProperty("License")
     private String license;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 255)
     @JsonProperty("ProductType")
     private ProductType productType;
 
     @Column(length = 2000)
-    @Size(max = 2000, message = "Description length must be less than or equal to 2000 characters")
     @JsonProperty("Description")
     private String description;
 
@@ -75,4 +84,8 @@ public class Product extends AbstractEntity<String> {
     @JoinColumn(name = "product_id")
     @JsonProperty("Images")
     private List<Image> images = new ArrayList<>();
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "wishlistItems")
+    private List<Wishlist> wishlists = new ArrayList<>();
 }

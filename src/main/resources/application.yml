@@ -1,6 +1,6 @@
 spring:
   application:
-    name: OnlineStore
+    name: FunkoStore
 
   datasource:
     driverClassName: org.postgresql.Driver
@@ -29,3 +29,10 @@ server:
     include-message: always
   port: ${PORT:8080}
   address: 0.0.0.0
+
+aws:
+  access-key: "${AWS_ACCESS_KEY_ID}"
+  secret-key: "${AWS_SECRET_ACCESS_KEY}"
+  s3:
+    region: "${AWS_REGION}"
+    bucket: "${S3_BUCKET_NAME}"
