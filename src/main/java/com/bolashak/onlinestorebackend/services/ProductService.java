@@ -1,15 +1,16 @@
 package com.bolashak.onlinestorebackend.services;
 
 import com.bolashak.onlinestorebackend.dto.ProductDto;
+import com.bolashak.onlinestorebackend.entities.Product;
 import com.bolashak.onlinestorebackend.entities.enums.ProductCategory;
 import com.bolashak.onlinestorebackend.entities.enums.ProductFeature;
 import com.bolashak.onlinestorebackend.entities.enums.ProductStatus;
 import com.bolashak.onlinestorebackend.entities.enums.ProductType;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface ProductService {
+    Iterable<Product> save(List<Product> products);
     List<ProductDto> getAll();
     ProductDto getById(String id);
     ProductDto createProduct(ProductDto productDto);

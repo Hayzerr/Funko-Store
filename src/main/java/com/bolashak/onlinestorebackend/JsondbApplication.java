@@ -1,7 +1,7 @@
 //package com.bolashak.onlinestorebackend;
 //
 //import com.bolashak.onlinestorebackend.entities.Product;
-//import com.bolashak.onlinestorebackend.services.impl.ProductServiceImpl;
+//import com.bolashak.onlinestorebackend.services.ProductService;
 //import com.fasterxml.jackson.core.JsonParser;
 //import com.fasterxml.jackson.core.type.TypeReference;
 //import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +22,7 @@
 //        SpringApplication.run(JsondbApplication.class, args);
 //    }
 //    @Bean
-//    CommandLineRunner runner(ProductServiceImpl productService) {
+//    CommandLineRunner runner(ProductService productService) {
 //        return args -> {
 //            // Read JSON and write to DB
 //            ObjectMapper mapper = new ObjectMapper();
