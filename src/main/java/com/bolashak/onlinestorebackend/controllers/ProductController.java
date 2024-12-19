@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -65,6 +66,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.getAll());
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
     @PostMapping
     @Operation(
             summary = "Создать продукт",
@@ -128,85 +130,5 @@ public class ProductController {
     )
     public ResponseEntity<ProductDto> getById(@PathVariable String id) {
         return ResponseEntity.ok(productService.getById(id));
-    }
-
-    @GetMapping("/category/{category}")
-    @Operation(
-            summary = "Получить продукты по категории",
-            description = "Возвращает список продуктов, принадлежащих указанной категории.",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Список продуктов по категории успешно получен",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductDto.class))
-                    )
-            }
-    )
-    public ResponseEntity<List<ProductDto>> getByCategory(@PathVariable ProductCategory category) {
-        return ResponseEntity.ok(productService.getByCategory(category));
-    }
-
-    @GetMapping("/feature/{feature}")
-    @Operation(
-            summary = "Получить продукты по характеристике",
-            description = "Возвращает список продуктов с указанной характеристикой.",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Список продуктов по характеристике успешно получен",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductDto.class))
-                    )
-            }
-    )
-    public ResponseEntity<List<ProductDto>> getByFeature(@PathVariable ProductFeature feature) {
-        return ResponseEntity.ok(productService.getByFeature(feature));
-    }
-
-    @GetMapping("/status/{status}")
-    @Operation(
-            summary = "Получить продукты по статусу",
-            description = "Возвращает список продуктов с указанным статусом.",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Список продуктов по статусу успешно получен",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductDto.class))
-                    )
-            }
-    )
-    public ResponseEntity<List<ProductDto>> getByStatus(@PathVariable ProductStatus status) {
-        return ResponseEntity.ok(productService.getByStatus(status));
-    }
-
-    @GetMapping("/type/{type}")
-    @Operation(
-            summary = "Получить продукты по типу",
-            description = "Возвращает список продуктов указанного типа.",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Список продуктов по типу успешно получен",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductDto.class))
-                    )
-            }
-    )
-    public ResponseEntity<List<ProductDto>> getByType(@PathVariable ProductType type) {
-        return ResponseEntity.ok(productService.getByType(type));
-    }
-
-    @GetMapping("/name/{name}")
-    @Operation(
-            summary = "Получить продукты по имени",
-            description = "Возвращает список продуктов, соответствующих указанному имени.",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Список продуктов по имени успешно получен",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductDto.class))
-                    )
-            }
-    )
-    public ResponseEntity<List<ProductDto>> getByName(@PathVariable String name) {
-        return ResponseEntity.ok(productService.getByName(name));
     }
 }
