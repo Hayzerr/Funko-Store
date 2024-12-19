@@ -1,0 +1,21 @@
+[
+  {
+    "Name": "POP! KH'YMM",
+    "Feature": "NO_FEATURE",
+    "Status": "EXCLUSIVE",
+    "License": "Star Wars",
+    "DefaultPrice": "15.00",
+    "DiscountPrice": "0.00",
+    "Link": "https://funko.com/pop-khymm/76838.html",
+    "Category": "SCIFI",
+    "Stock": "1000",
+    "id": "76838",
+    "ProductType": "POP",
+    "Description": "Incoming: a stellar new discovery! Bring home this exclusive Pop! Kh’ymm from STAR WARS: SKELETON CREW. Keep all your favorite memories and characters from the live-action series close—and in top Pop! form. Expand your STAR WARS and Pop! Movies and Television collections today. Vinyl bobblehead is approximately 3.55-inches tall.",
+    "Images": [
+      "https://funko.com/dw/image/v2/BGTS_PRD/on/demandware.static/-/Sites-funko-master-catalog/default/dwb33549ea/images/funko/upload/76838_StarWars_SkeletonCrew_EXPOP1_POP_GLAM-3-WEB.png",
+      "https://funko.com/dw/image/v2/BGTS_PRD/on/demandware.static/-/Sites-funko-master-catalog/default/dw34b65ddc/images/funko/upload/76838_POP-StarWars-SkeletonCrewS1-POP1-lifestyle.jpg",
+      "https://funko.com/dw/image/v2/BGTS_PRD/on/demandware.static/-/Sites-funko-master-catalog/default/dwebd49d90/images/funko/upload/76838_StarWars_SkeletonCrew_EXPOP1_POP_FW_GLAM-1-WEB.png"
+    ]
+  }
+]

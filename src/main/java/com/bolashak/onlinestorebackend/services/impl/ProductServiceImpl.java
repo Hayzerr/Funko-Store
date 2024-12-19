@@ -82,7 +82,12 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
     }
 
-
+    public Iterable<Product> list() {
+        return productRepository.findAll();
+    }
+    public Iterable<Product> save(List<Product> products) {
+        return productRepository.saveAll(products);
+    }
     @Override
     public List<ProductDto> getAll() {
         List<Product> products = productRepository.findAll();
