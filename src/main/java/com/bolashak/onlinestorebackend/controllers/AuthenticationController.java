@@ -140,4 +140,10 @@ public class AuthenticationController {
         authenticationService.logout(refreshToken);
         return ResponseEntity.ok("Logout successful");
     }
+
+    @GetMapping("/confirm-email")
+    public ResponseEntity<?> confirmEmail(@RequestParam("token") String token) {
+        return authenticationService.confirmEmail(token);
+    }
+
 }
