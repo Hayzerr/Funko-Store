@@ -84,6 +84,7 @@ public class ProductController {
         return ResponseEntity.ok(createdProduct);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
     @PutMapping("/{id}")
     @Operation(
             summary = "Обновить продукт",
@@ -100,6 +101,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.updateProduct(id, productDto));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
     @DeleteMapping("/{id}")
     @Operation(
             summary = "Удалить продукт",
