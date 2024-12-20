@@ -47,7 +47,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final ModelMapper modelMapper;
 
-    private final long ACCESS_TOKEN_VALIDITY = 15 * 60 * 1000;  // 15 minutes
+    private final long ACCESS_TOKEN_VALIDITY = 15 * 60 * 60 * 1000;  // 15 hours
     private final long REFRESH_TOKEN_VALIDITY = 7 * 24 * 60 * 60 * 1000;  // 7 days
     private final RoleRepository roleRepository;
 

@@ -50,22 +50,6 @@ public class ProductController {
         return ResponseEntity.ok(productService.getFilteredProducts(category, feature, status, type, name, page, size));
     }
 
-    @GetMapping("/list")
-    @Operation(
-            summary = "Получить все продукты",
-            description = "Возвращает список всех доступных продуктов.",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Список всех продуктов успешно получен",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductDto.class))
-                    )
-            }
-    )
-    public ResponseEntity<List<ProductDto>> getAll() {
-        return ResponseEntity.ok(productService.getAll());
-    }
-
     @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
     @PostMapping
     @Operation(
