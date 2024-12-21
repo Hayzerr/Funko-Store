@@ -25,7 +25,6 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.667")
     implementation("org.springframework.boot:spring-boot-starter-mail")
-    implementation ("com.mashape.unirest:unirest-java:1.4.9")
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")

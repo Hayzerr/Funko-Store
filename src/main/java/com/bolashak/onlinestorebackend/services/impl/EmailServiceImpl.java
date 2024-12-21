@@ -46,7 +46,6 @@ public class EmailServiceImpl implements EmailService {
             System.out.println("Email sent successfully to " + recipientEmail);
         } catch (MessagingException e) {
             System.err.println("Failed to send email to " + recipientEmail);
-            e.printStackTrace();
         }
     }
 
