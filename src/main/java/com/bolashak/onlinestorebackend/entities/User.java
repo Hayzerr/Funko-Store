@@ -16,6 +16,13 @@ public class User extends AbstractEntity<Long>{
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Column(name = "verification_code", length = 64)
+    private String verificationCode;
+
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean enabled = false;
+
+
     @Column(nullable = false)
     private String firstName;
 
