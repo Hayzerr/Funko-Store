@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +37,30 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
+
+    @GetMapping("/profile")
+    @Operation(
+            summary = "Получить профиль текущего пользователя",
+            description = "Возвращает информацию о текущем пользователе, который выполнил запрос.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Профиль успешно получен",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Пользователь не найден",
+                            content = @Content(mediaType = "application/json", schema = @Schema(example = "{\"error\": \"User not found\"}"))
+                    )
+            }
+    )
+    public ResponseEntity<User> getCurrentUserProfile() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.getUserByUsername(username);
+        return ResponseEntity.ok(user);
+    }
+
 
     @GetMapping("/{id}")
     @Operation(
