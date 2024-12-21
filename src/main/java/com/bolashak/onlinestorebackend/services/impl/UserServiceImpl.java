@@ -1,6 +1,5 @@
 package com.bolashak.onlinestorebackend.services.impl;
 
-import com.bolashak.onlinestorebackend.entities.Role;
 import com.bolashak.onlinestorebackend.entities.User;
 import com.bolashak.onlinestorebackend.repository.UserRepository;
 import com.bolashak.onlinestorebackend.services.UserService;
@@ -19,9 +18,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
+
+
     @Override
-    public User createUser(User user) {
+    public User createUser(User user){
         return userRepository.save(user);
+
     }
 
     @Override
@@ -33,6 +35,7 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
+
 
     @Override
     public User getUserByUsername(String username) {
