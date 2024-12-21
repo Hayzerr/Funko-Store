@@ -14,7 +14,7 @@ import java.util.Properties;
 public class EmailServiceImpl implements EmailService {
 
     private static final String SENDER_EMAIL = "230107015@sdu.edu.kz";
-    private static final String APP_PASSWORD = "Adi600871"; // Use the app password here
+    private static final String APP_PASSWORD = "Adi600871";
 
     @Override
     public void sendEmail(String recipientEmail, String subject, String messageText) {

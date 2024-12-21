@@ -89,7 +89,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String recipientEmail = user.getEmail();
         String subject = "Complete Registration!";
         String text = "To confirm your account, please click here: " +
-                "http://localhost:8080/api/auth/confirm-email?token=" + confirmationToken.getConfirmationToken();
+                "https://funko-store.onrender.com/api/auth/confirm-email?token=" + confirmationToken.getConfirmationToken();
 
         emailService.sendEmail(recipientEmail, subject, text);
 

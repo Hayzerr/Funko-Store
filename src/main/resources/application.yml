@@ -1,15 +1,9 @@
 spring:
   mail:
-    host: smtp.mailgun.org
+    host: smtp.gmail.com
     port: 587
-    username: postmaster@sandboxa4fc864e0d0b44c4bc8fb69ab245be98.mailgun.org
-    password: a5b8db7ccdab6973e72aba6711dcd25d-0920befd-a28477cd
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+    username: "${EMAIL_USERNAME}"
+    password: "${EMAIL_PASSWORD}"
   application:
     name: FunkoStore
 
