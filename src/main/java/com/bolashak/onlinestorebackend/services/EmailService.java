@@ -1,7 +1,5 @@
 package com.bolashak.onlinestorebackend.services;
 
-import org.springframework.mail.SimpleMailMessage;
-
 public interface EmailService {
-    void sendEmail(SimpleMailMessage email);
+    void sendEmail(String toEmail, String subject, String body);
 }

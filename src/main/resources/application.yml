@@ -1,9 +1,9 @@
 spring:
   mail:
-    host: smtp.gmail.com
+    host: smtp.mailgun.org
     port: 587
-    username: "${EMAIL_USERNAME}"
-    password: "${EMAIL_PASSWORD}"
+    username: postmaster@sandboxa4fc864e0d0b44c4bc8fb69ab245be98.mailgun.org
+    password: a5b8db7ccdab6973e72aba6711dcd25d-0920befd-a28477cd
     properties:
       mail:
         smtp:

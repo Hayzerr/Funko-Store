@@ -20,7 +20,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -55,9 +54,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final long REFRESH_TOKEN_VALIDITY = 7 * 24 * 60 * 60 * 1000;  // 7 days
     private final RoleRepository roleRepository;
 
-    ConfirmationTokenRepository confirmationTokenRepository;
+    private final ConfirmationTokenRepository confirmationTokenRepository;
 
-    EmailService emailService;
+    private final EmailService emailService;
 
     @Transactional
     public UserResponse register(RegisterRequest registerRequest) {
@@ -76,24 +75,27 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setDeleted(false);
         user.setRole(roleOptional.get());
         log.info("User registered: {}", user);
-        User registeredUser = userRepository.save(user);
+        user = userRepository.save(user);
 
         ConfirmationToken confirmationToken = new ConfirmationToken();
-        confirmationToken.setUser(registeredUser);
+        confirmationToken.setUser(user);
         confirmationToken.setConfirmationToken(java.util.UUID.randomUUID().toString());
         confirmationToken.setCreatedDate(new Date());
         confirmationTokenRepository.save(confirmationToken);
+        user.setVerificationCode(confirmationToken.getConfirmationToken());
+        userRepository.save(user);
 
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(registeredUser.getEmail());
-        mailMessage.setSubject("Complete Registration!");
-        mailMessage.setText("To confirm your account, please click here: " +
-                "http://localhost:8085/api/auth/confirm-email?token=" + confirmationToken.getConfirmationToken());
-        emailService.sendEmail(mailMessage);
 
-        log.info("Confirmation email sent to: {}", registeredUser.getEmail());
+        String recipientEmail = user.getEmail();
+        String subject = "Complete Registration!";
+        String text = "To confirm your account, please click here: " +
+                "http://localhost:8080/api/auth/confirm-email?token=" + confirmationToken.getConfirmationToken();
 
-        return modelMapper.map(registeredUser, UserResponse.class);
+        emailService.sendEmail(recipientEmail, subject, text);
+
+        log.info("Confirmation email sent to: {}", user.getEmail());
+
+        return modelMapper.map(user, UserResponse.class);
     }
     @Transactional
     public ResponseEntity<?> confirmEmail(String confirmationToken) {
