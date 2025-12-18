@@ -1,27 +1,12 @@
-# Stage 1: Build the application
+# Stage 1: build with Gradle (already has gradle + JDK21)
 FROM gradle:8.8-jdk21 AS build
 WORKDIR /app
+COPY . .
+RUN gradle clean build -x test
 
-RUN microdnf install findutils
-
-# Copy Gradle wrapper and build files
-COPY build.gradle.kts settings.gradle.kts gradlew ./
-COPY gradle gradle
-
-# Set execution permission for the Gradle wrapper
-RUN chmod +x ./gradlew
-
-# Copy the source code
-COPY src src
-
-# Build the application without running tests
-RUN ./gradlew clean build -x test
-
-# Stage 2: Create the final Docker image using OpenJDK 21
-FROM gradle:8.8-jdk21
-VOLUME /tmp
-
-# Copy the JAR from the build stage
+# Stage 2: runtime
+FROM eclipse-temurin:21-jre
+WORKDIR /
 COPY --from=build /app/build/libs/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
 EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app.jar"]
