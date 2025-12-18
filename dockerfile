@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM openjdk:21-jdk AS build
+FROM gradle:8.8-jdk21 AS build
 WORKDIR /app
 
 RUN microdnf install findutils
