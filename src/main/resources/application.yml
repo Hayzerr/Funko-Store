@@ -9,9 +9,9 @@ spring:
 
   datasource:
     driverClassName: org.postgresql.Driver
-    url: ${DATABASE_URL:jdbc:postgresql://dpg-ct8shd5ds78s73cgeneg-a.oregon-postgres.render.com/onlinestore_aequ}
+    url: ${DATABASE_URL:jdbc:postgresql://dpg-d527gjkhg0os73eet06g-a.ohio-postgres.render.com/onlinestore_aud2}
     username: ${DATABASE_USERNAME:bolashak}
-    password: ${DATABASE_PASSWORD:NhwdRIVzZganJgIgbBxFuSTk3EpiFztW}
+    password: ${DATABASE_PASSWORD:4oLhQJoHcyUJ4pC2Dfrbuu9Wbmltz95P}
   jpa:
     properties:
       hibernate:
