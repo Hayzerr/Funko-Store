@@ -18,7 +18,7 @@ COPY src src
 RUN ./gradlew clean build -x test
 
 # Stage 2: Create the final Docker image using OpenJDK 21
-FROM openjdk:21-jdk
+FROM gradle:8.8-jdk21
 VOLUME /tmp
 
 # Copy the JAR from the build stage
