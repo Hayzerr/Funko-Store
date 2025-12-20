@@ -37,7 +37,8 @@ public class JwtUtil {
         return claimsResolver.apply(claims);
     }
 
-    private Claims extractAllClaims(String token) {
+    // Сделай этот метод публичным, чтобы достать данные из токена
+    public Claims extractAllClaims(String token) {
         JwtParser parser = Jwts.parserBuilder().setSigningKey(secretKey).build();
         return parser.parseClaimsJws(token).getBody();
     }
@@ -46,9 +47,21 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
+    // Старый метод без extra claims
     public String generateToken(String username, long expirationMillis) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, username, expirationMillis);
+    }
+
+    // Новый метод с extra claims
+    public String generateToken(Map<String, Object> extraClaims, String username, long validity) {
+        return Jwts.builder()
+                .setClaims(extraClaims)
+                .setSubject(username)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + validity))
+                .signWith(secretKey, SignatureAlgorithm.HS256)  // Используй secretKey вместо getSigningKey()
+                .compact();
     }
 
     private String createToken(Map<String, Object> claims, String subject, long expirationMillis) {
@@ -64,5 +77,11 @@ public class JwtUtil {
     public Boolean validateToken(String token, String username) {
         final String extractedUsername = extractUsername(token);
         return (extractedUsername.equals(username) && !isTokenExpired(token));
+    }
+
+    // Добавь метод для извлечения конкретного claim
+    public <T> T extractClaim(String token, String claimName, Class<T> type) {
+        final Claims claims = extractAllClaims(token);
+        return claims.get(claimName, type);
     }
 }

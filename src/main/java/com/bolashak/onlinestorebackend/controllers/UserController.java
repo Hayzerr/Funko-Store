@@ -124,4 +124,10 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/addDescription")
+    public ResponseEntity<String> pushDescription(
+            @RequestBody String description) {
+        return ResponseEntity.ok(userService.pushDescription(description));
+    }
 }

@@ -28,7 +28,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -72,7 +75,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setLastName(registerRequest.getLastName());
         user.setAddress(registerRequest.getAddress());
         user.setPhone(registerRequest.getPhone());
-        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        user.setPassword(registerRequest.getPassword());
         user.setEmail(registerRequest.getEmail());
         user.setDeleted(false);
         user.setRole(roleOptional.get());
@@ -111,13 +114,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         return ResponseEntity.ok("Email verified successfully!");
     }
+
     @Transactional
     public AuthenticationResponse login(String username, String password) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
 
-        String accessToken = jwtUtil.generateToken(userDetails.getUsername(), ACCESS_TOKEN_VALIDITY);
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getId());
+        claims.put("email", user.getEmail());
+        claims.put("firstName", user.getFirstName());
+        claims.put("lastName", user.getLastName());
+        claims.put("address", user.getAddress());
+        claims.put("password", user.getPassword());
+        claims.put("phone", user.getPhone());
+
+        String accessToken = jwtUtil.generateToken(claims, userDetails.getUsername(), ACCESS_TOKEN_VALIDITY);
         String refreshTokenStr = jwtUtil.generateToken(userDetails.getUsername(), REFRESH_TOKEN_VALIDITY);
 
         RefreshToken refreshToken = new RefreshToken();
