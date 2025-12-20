@@ -85,8 +85,8 @@ public class ProductController {
 
         // ⚠️ VULNERABILITY: SQL Injection - FOR EDUCATIONAL PURPOSES ONLY
         // This endpoint is intentionally vulnerable for security testing demonstration
-        @GetMapping("/search-vulnerable")
-        @Operation(summary = "Поиск продуктов (УЯЗВИМЫЙ ЭНДПОИНТ)", description = "⚠️ ВНИМАНИЕ: Этот эндпоинт содержит уязвимость SQL Injection для образовательных целей. НЕ ИСПОЛЬЗОВАТЬ В ПРОДАКШЕНЕ!", responses = {
+        @GetMapping("/search")
+        @Operation(summary = "Поиск продуктов", description = "Поиск продуктов по названию", responses = {
                         @ApiResponse(responseCode = "200", description = "Результаты поиска", content = @Content(mediaType = "application/json"))
         })
         public ResponseEntity<?> vulnerableSearch(@RequestParam String query) {
