@@ -83,17 +83,12 @@ public class ProductController {
                 return ResponseEntity.ok(productService.getById(id));
         }
 
-        // ⚠️ VULNERABILITY: SQL Injection - FOR EDUCATIONAL PURPOSES ONLY
-        // This endpoint is intentionally vulnerable for security testing demonstration
         @GetMapping("/search")
         @Operation(summary = "Поиск продуктов", description = "Поиск продуктов по названию", responses = {
                         @ApiResponse(responseCode = "200", description = "Результаты поиска", content = @Content(mediaType = "application/json"))
         })
         public ResponseEntity<?> vulnerableSearch(@RequestParam String query) {
                 try {
-                        // VULNERABILITY: Direct string concatenation in SQL query
-                        // This allows SQL injection attacks
-                        // Using LOWER() for case-insensitive search
                         String sql = "SELECT * FROM product WHERE LOWER(name) LIKE LOWER('%" + query + "%')";
 
                         System.out.println("⚠️ EXECUTING VULNERABLE QUERY: " + sql);
@@ -103,7 +98,6 @@ public class ProductController {
 
                         return ResponseEntity.ok(results);
                 } catch (Exception e) {
-                        // VULNERABILITY: Exposing detailed error messages
                         System.err.println("⚠️ SQL ERROR: " + e.getMessage());
                         return ResponseEntity.status(500).body("Database Error: " + e.getMessage() +
                                         "\n\nStack Trace: " + e.getClass().getName());
