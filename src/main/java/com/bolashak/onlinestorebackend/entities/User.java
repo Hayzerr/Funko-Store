@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "store_user")
+@ToString
 public class User extends AbstractEntity<Long>{
     @Column(nullable = false, unique = true)
     private String username;
